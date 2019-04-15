@@ -10,6 +10,12 @@ app.post("/addImage", upload.single("avatar"), (req, res) => {
     body: req.body,
   });
 });
+app.post('/addImage',  upload.fields([{ name: 'avatar', maxCount: 2 }, { name: 'image', maxCount: 8 }]), (req, res)  => {
+  res.status(200).json({
+     files: req.files,
+     body: req.body
+  })
+})
 var server = app.listen(8080, function() {
   var host = server.address().address;
   var port = server.address().port;
